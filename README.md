@@ -1,7 +1,1 @@
 # PHP Portfolio
-
-Rode:
-
-```bash
-
-```
