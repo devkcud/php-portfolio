@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 	$senharepetida = $_POST["senha-repetida"];
 
 	$usernamequery = $db->prepare("SELECT * FROM person WHERE username = ?");
-	$usernamequery->bind_param("s", $email);
+	$usernamequery->bind_param("s", $nomeusuario);
 	$usernamequery->execute();
 	$usernameresult = $usernamequery->get_result();
 
