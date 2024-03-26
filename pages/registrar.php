@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 		$stmt = $db->prepare("INSERT INTO person (fullname, username, email, password) VALUES (?, ?, ?, ?)");
 		$stmt->bind_param("ssss", $nome, $nomeusuario, $email, $senha); // TODO: Implement password hashing
 		$stmt->execute();
-		//header('Location: login.php');
+		header('Location: login.php');
 	}
 }
 ?>
@@ -60,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 			<h1 class="title">Nome de Usuário</h1>
 			<input id="nomeusuario" type="text" class="input" placeholder="johndoe123" name="nomeusuario" required>
 		</div>
-
 
 		<div>
 			<h1 class="title required">Email</h1>
