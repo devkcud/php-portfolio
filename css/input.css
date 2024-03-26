@@ -9,5 +9,18 @@ body {
 }
 
 .btn {
-    @apply block px-4 py-2 text-sm bg-purple-500 rounded-md w-fit;
+    @apply block px-4 py-1 text-sm text-[#04060c] font-bold bg-purple-500 rounded-md;
+}
+
+.input {
+    @apply w-full px-4 py-2 bg-transparent border rounded-full border-neutral-700 placeholder:text-neutral-700 focus:outline-none focus:outline-2 focus:outline-purple-500;
+}
+
+.title {
+    @apply text-4xl font-bold text-purple-500;
+}
+
+.required::after {
+    content: '*';
+    @apply text-red-600;
 }
