@@ -76,10 +76,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 			<input id="senharepetida" type="password" class="input" placeholder="•••••••••••••••••" name="senha-repetida" required>
 		</div>
 
+		<p class="text-sm italic text-center opacity-50">Ao se registrar em nossa plataforma, você concorda automaticamente com os <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="link">Termos de Serviço</a>.</p>
+
 		<button class="w-full btn">Criar</button>
 
 		<?php echo "<p class='mx-auto text-red-500 w-fit'>$error</p>"; ?>
 	</form>
+
+	<p>Já tem uma conta? <a href="login.php" class="link">Faça login</a></p>
 </section>
 
 <script>

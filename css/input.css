@@ -24,3 +24,7 @@ body {
     content: '*';
     @apply text-red-600;
 }
+
+.link {
+    @apply underline text-purple-500;
+}

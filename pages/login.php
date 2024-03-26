@@ -43,6 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["email"]) && isset($_P
 
 		<?php echo "<p class='mx-auto text-red-500 w-fit'>$error</p>"; ?>
 	</form>
+
+	<p>Ainda não tem uma conta? <a href="registrar.php" class="link">Registre-se</a></p>
 </section>
 
 <script>
