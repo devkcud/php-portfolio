@@ -32,6 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 
 	if ($usernameresult->num_rows !== 0) {
 		$error = "Esse nome de usuário já existe.";
+	} else if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+		$error = "Este email não é valido";
 	} else if ($emailresult->num_rows !== 0) {
 		$error = "Esse email já existe.";
 	} else if ($senha !== $senharepetida) {
@@ -62,17 +64,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 
 		<div>
 			<h1 class="title required">Email</h1>
-			<input type="text" class="input" placeholder="johndoe@exemplo.com" name="email" required>
+			<input id="email" type="text" class="input" placeholder="johndoe@exemplo.com" name="email" required>
 		</div>
 
 		<div>
 			<h1 class="title required">Senha</h1>
-			<input type="password" class="input" placeholder="•••••••••••••••••" name="senha" required>
+			<input id="senha" type="password" class="input" placeholder="•••••••••••••••••" name="senha" required>
 		</div>
 
 		<div>
 			<h1 class="title required">Repita a Senha</h1>
-			<input type="password" class="input" placeholder="•••••••••••••••••" name="senha-repetida" required>
+			<input id="senharepetida" type="password" class="input" placeholder="•••••••••••••••••" name="senha-repetida" required>
 		</div>
 
 		<button class="w-full btn">Criar</button>
@@ -104,6 +106,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 			inputNomeUsuario.placeholder = 'johndoe123';
 		}
 
+		if (e.target.value === '') {
+			toUsername = '';
+			inputNomeUsuario.placeholder = 'johndoe123';
+		}
+
 		lastUsername = toUsername;
 	};
 
@@ -113,5 +120,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_PO
 
 	inputNomeUsuario.onblur = (e) => {
 		if (e.target.value === "" && lastUsername !== "") e.target.value = e.target.placeholder;
+	}
+
+	<?php
+	if ($_SERVER["REQUEST_METHOD"] !== "POST" && !isset($_POST["nome"]) && !isset($_POST["nomeusuario"]) && !isset($_POST["email"]) && !isset($_POST["senha"]) && !isset($_POST["senha-repetida"])) {
+		echo "</script>";
+		exit;
+	}
+	?>
+
+	window.onload = (e) => {
+		let name = "<?php echo $_POST["nome"] ?>";
+		let username = "<?php echo sanitizeString($_POST["nomeusuario"]) ?>";
+		let email = "<?php echo $_POST["email"] ?>";
+		let senha = "<?php echo $_POST["senha"] ?>";
+		let senharepetida = "<?php echo $_POST["senha-repetida"] ?>";
+
+		document.getElementById("nome").value = name;
+		document.getElementById("nomeusuario").value = username;
+		document.getElementById("email").value = email;
+		document.getElementById("senha").value = senha;
+		document.getElementById("senharepetida").value = senharepetida;
+
+		lastUsername = inputNomeUsuario.placeholder = name.toLowerCase().replaceAll(/[^a-z0-9]/gi, "") + random;
+		inputNomeUsuario.placeholder = name.toLowerCase().replaceAll(/[^a-z0-9]/gi, "") + random;
 	}
 </script>
