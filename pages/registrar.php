@@ -1,6 +1,9 @@
 <?php
 require_once("../utils/gen.php");
 require_once "../utils/db.php";
+require_once("../utils/auth.php");
+
+redirectLogged("home.php");
 
 gen_head("New Portfolio");
 

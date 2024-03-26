@@ -6,7 +6,7 @@ $cookieName = "auth_session_id";
 
 function getAuthCookie(): string {
 	global $cookieName;
-	return $_COOKIE[$cookieName];
+	return $_COOKIE[$cookieName] ?? "";
 }
 
 function setAuthCookie(string $value) {
@@ -16,4 +16,22 @@ function setAuthCookie(string $value) {
 		'httponly' => true,
 		'samesite' => 'Strict'
 	]);
+}
+
+function isLogged(): bool {
+	// this is the best auth ive ever seen
+	return getAuthCookie() !== "";
+}
+
+function logout() {
+	global $cookieName;
+	setcookie($cookieName, "", time() - 1); // lol
+}
+
+function redirectLogged(string $path) {
+	if (isLogged()) header("Location: $path");
+}
+
+function redirectNotLogged(string $path) {
+	if (!isLogged()) header("Location: $path");
 }
