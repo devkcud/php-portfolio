@@ -17,9 +17,9 @@ function sanitizeString($str) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nome"]) && isset($_POST["nomeusuario"]) && isset($_POST["email"]) && isset($_POST["senha"]) && isset($_POST["senha-repetida"])) {
-	$nome = $_POST["nome"];
-	$nomeusuario = sanitizeString($_POST["nomeusuario"]);
-	$email = $_POST["email"];
+	$nome = htmlspecialchars($_POST["nome"]);
+	$nomeusuario = htmlspecialchars(sanitizeString($_POST["nomeusuario"]));
+	$email = htmlspecialchars($_POST["email"]);
 	$senha = $_POST["senha"];
 	$senharepetida = $_POST["senha-repetida"];
 
